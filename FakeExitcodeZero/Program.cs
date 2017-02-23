@@ -34,9 +34,9 @@ namespace FakeExitcodeZero
 
 			foreach (var arg in args)
 			{
-				if (arg.StartsWith("--aot=outfile=", StringComparison.Ordinal))
+				if (arg.Contains("outfile="))
 				{
-					var path = arg.Split('=')[2].Split(',')[0];
+					var path = arg.Split(new[] { "outfile=" }, 2, StringSplitOptions.RemoveEmptyEntries)[1].Split(',')[0];
 					Console.WriteLine("Create file: " + path);
 					if (!File.Exists(path) && !File.Exists(path + ".tmp")) File.Create(path);
 				}
